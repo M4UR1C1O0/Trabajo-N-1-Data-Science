@@ -13,7 +13,7 @@ nombres_columnas = ['Año','Siniestros','Fallecidos','Lesionados - Graves','Lesi
                     'Indicadores cada 100.000 habitantes - Morbilidad','Fallecidos cada 100 siniestros','Siniestros por cada fallecido']
 
 #2.- Cargamos los datos desde el archivo CSV
-patharchivo = '/workspaces/Trabajo-N-2-Data-Science/Datos/EvolucionsiniestrostransitoChile-1972-2024.csv'
+patharchivo = 'Datos/EvolucionsiniestrostransitoChile-1972-2024.csv'
 df = pd.read_csv(patharchivo,sep=';',encoding='latin-1',skiprows=4, # Codificación del archivo # Saltar título y encabezados múltiples # Asignar nombres personalizados
                  names=nombres_columnas,na_values=['', ' '])
 
@@ -52,8 +52,8 @@ for col in df_limpio.columns:
         df_limpio[col] = df_limpio[col].apply(convertir_numero)
 
 #5.- Guardamos el archivo limpio sin subcategorías
-nuevo_archivo = '/workspaces/Trabajo-N-2-Data-Science/Datos/datos_sin_subcategorias.csv'
-df_limpio.to_csv(nuevo_archivo, index=False, encoding='latin-1')
+nuevo_archivo = 'Datos/datos_sin_subcategorias.csv'
+df_limpio.to_csv(nuevo_archivo, index=False, encoding='utf-8')
 
 #print(df)
 #print(df_limpio)
