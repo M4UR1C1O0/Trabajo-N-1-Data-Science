@@ -1,11 +1,43 @@
 import pandas as pd
 import numpy as np
+import sys
 
 archivo = 'Datos/datos_sin_subcategoria.csv'
 df = pd.read_csv(archivo, encoding='utf-8')
 df.columns = [col.lower() for col in df.columns]
 problemas = []
 
+columnas_esperadas = [
+    'Año', 'Siniestros', 'Fallecidos', 'Lesionados - Graves', 'Lesionados - Menos graves',
+    'Lesionados - Leves', 'Total lesionados', 'Total víctimas', 'Tasa motorización',
+    'Vehículos cada 100 habitantes', 'Parque vehicular', 'Población',
+    'Indicadores cada 10.000 vehículos - Siniestralidad', 'Indicadores cada 10.000 vehículos - Mortalidad',
+    'Indicadores cada 10.000 vehículos - Morbilidad', 'Indicadores cada 100.000 habitantes - Siniestralidad',
+    'Indicadores cada 100.000 habitantes - Mortalidad', 'Indicadores cada 100.000 habitantes - Morbilidad',
+    'Fallecidos cada 100 siniestros', 'Siniestros por cada fallecido'
+]
+
+columnas_reales_norm = [c.lower() for c in df.columns]
+columnas_esperadas_norm = [c.lower() for c in columnas_esperadas]
+
+# Columnas faltantes
+columnas_faltantes = [col for col in columnas_esperadas if col.lower() not in columnas_reales_norm]
+# Columnas extra
+columnas_extra = [col for col in df.columns if col.lower() not in columnas_esperadas_norm]
+
+if columnas_faltantes:
+    print(f" ERROR: Faltan {len(columnas_faltantes)} columnas:")
+    for col in columnas_faltantes:
+        print(f"   - {col}")
+    sys.exit(1)
+
+if columnas_extra:
+    print(f" ERROR: Hay {len(columnas_extra)} columnas extra:")
+    for col in columnas_extra:
+        print(f"   - {col}")
+    sys.exit(1)
+
+print("El archivo solo tiene las columnas requeridas.")
 # ==================== VALIDAR AÑO ====================
 if 'año' in df.columns:
     año_norm = df['año'].astype(str).str.strip().str.replace(r'\.0$', '', regex=True)
@@ -51,14 +83,7 @@ cols = ['siniestros', 'fallecidos', 'lesionados - graves', 'lesionados - menos g
         'indicadores cada 100.000 habitantes - siniestralidad', 'indicadores cada 100.000 habitantes - mortalidad',
         'indicadores cada 100.000 habitantes - morbilidad', 'fallecidos cada 100 siniestros', 'siniestros por cada fallecido']
 
-print("\n" + "="*80)
-print("validaciones")
-print("="*80)
-for col in cols: validar(col)
-
-# ==================== CHEQUEOS GENERALES ====================
-print(f"\n{'='*80}\nchequeos generales\n{'='*80}")
-
+# ==================== CHEQUEOS GENERALES ============
 vac = df[df.isnull().all(axis=1)].index
 if len(vac) > 0:
     for idx in vac: problemas.append({'tipo': 'estructura - fila vacia', 'columna': 'todas', 'fila': idx, 'valor': 'vacia', 'desc': 'sin datos'})
@@ -81,7 +106,26 @@ if all(c in df.columns for c in ['fallecidos', 'total lesionados', 'total victim
         for idx in inco.index: problemas.append({'tipo': 'coherencia - victimas', 'columna': 'total victimas', 'fila': idx, 'valor': f"t={inco.loc[idx,'total victimas']}", 'desc': 'suma incorrecta'})
         print(f"incoherencias victimas: {len(inco)}")
 
-# ==================== REPORTE ====================
+vars_entero = [
+    'siniestros', 'fallecidos', 'lesionados - graves', 'lesionados - menos graves',
+    'lesionados - leves', 'total lesionados', 'total victimas', 'poblacion', 'parque vehicular'
+]
+
+for col in vars_entero:
+    if col in df.columns:
+        decimales = df[df[col].notnull() & (df[col] % 1 != 0)]
+        if not decimales.empty:
+            for idx in decimales.index:
+                problemas.append({
+                    'tipo': f'{col} - decimal en entero fisico',
+                    'columna': col,
+                    'fila': idx,
+                    'valor': df.loc[idx, col],
+                    'desc': 'decimal inesperado (corregir/redondear)'
+                })
+            print(f"{col}: {len(decimales)} valores decimales en columna física")
+
+# ==================== REPORTE FINAL (con decimales en variables físicas) ====================
 print(f"\n{'='*80}\nreporte final\n{'='*80}\n")
 if problemas:
     print(f"total: {len(problemas)} errores\n")
