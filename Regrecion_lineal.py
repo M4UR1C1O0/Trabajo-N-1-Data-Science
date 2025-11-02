@@ -18,8 +18,8 @@ y_pred = modelo.predict(X)
 
 # Mostramos los coeficientes del modelo, la interseccion y la precision (R^2)
 print(f"Coeficientes: {modelo.coef_}") 
-print(f"Intersección: {modelo.intercept_}")
-print(f"Precisión (R^2): {modelo.score(X, y)}")
+print(f"Interseccion: {modelo.intercept_}")
+print(f"Precision (R^2): {modelo.score(X, y)}")
 
 # Grafico de los valores reales vs los valores predichos
 plt.figure(figsize=(7,5))
