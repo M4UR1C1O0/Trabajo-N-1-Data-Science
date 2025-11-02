@@ -1,5 +1,7 @@
 from Limpieza import df # Importamos el dataframe limpio creado en Limpieza.py
 
+'''Arreglar la importacion del dataframe limpio desde Limpieza.py'''
+
 # Librerias necesarias
 import pandas as pd 
 from sklearn.linear_model import LinearRegression # Importamos el modelo de regresión lineal
