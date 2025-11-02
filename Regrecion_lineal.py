@@ -1,31 +1,35 @@
-from Limpieza_profunda import df # Importamos el dataframe limpio creado en limpieza.py
+from Limpieza import df # Importamos el dataframe limpio creado en Limpieza.py
 
-#Librereias
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
+# Librerías necesarias
+import pandas as pd 
+from sklearn.linear_model import LinearRegression # Importamos el modelo de regresión lineal
+import matplotlib.pyplot as plt                   # Librería para los graficos
 
-#Librerias necesarias para la regresion lineal
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+# Prediccion de fallecidos usando regresion lineal multiple
 
-#Definimos las variables dependientes e independientes
-X = ['Parque vehicular', 'Población', 'Siniestros', 'Año']
-y = 'Fallecidos'
+#Definimos las variables independientes (X) y la variable dependiente (y)
+X = df[['Siniestros','Población', 'Año','Tasa motorización','Lesionados - Graves', 'Lesionados - Leves', 'Lesionados - Menos graves',]]
+y = df['Fallecidos']
 
-#Dividimos los datos en conjuntos de entrenamiento y prueba
-X_train, X_test, y_train, y_test = train_test_split(df[X], df[y], test_size=0.2, random_state=42)
-
-
-#Creamos el modelo de regresion lineal y lo entrenamos
+# Creamos el modelo de regresión lineal multiple y lo ajustamos a los datos
 modelo = LinearRegression()
-modelo.fit(X_train, y_train)
+modelo.fit(X, y)
+y_pred = modelo.predict(X)
 
-#Realizamos las predicciones en el conjunto de prueba 
-y_pred = modelo.predict(X_test)
+# Mostramos los coeficientes del modelo, la interseccion y la precision (R^2)
+print(f"Coeficientes: {modelo.coef_}") 
+print(f"Intersección: {modelo.intercept_}")
+print(f"Precisión (R^2): {modelo.score(X, y)}")
 
-#Revisamos los coeficeintes del modelo
-print("Coeficientes del modelo:", modelo.coef_)
-print("Intersección del modelo:", modelo.intercept_)
-print("Maen Absolute Error (MAE):", np.mean(np.abs(y_test - y_pred)))
-print("Precisión del modelo (R^2):", modelo.score(X_test, y_test))
+# Grafico de los valores reales vs los valores predichos
+plt.figure(figsize=(7,5))
+plt.scatter(y, y_pred, color='blue', alpha=0.7, label='Prediccion vs Real')
+plt.plot([y.min(), y.max()], [y.min(), y.max()], 'r--', lw=2, label='Prediccion perfecta')
+plt.xlabel('Fallecidos reales')
+plt.ylabel('Fallecidos predichos')
+plt.title('Regresión lineal multiple: Prediccion vs Real')
+plt.legend()
+plt.tight_layout() 
+
+# Guardamos el grafico para su posterior visualizacion
+plt.savefig('regresion_lineal_multiple.png')
