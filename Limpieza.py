@@ -17,7 +17,7 @@ for col in df.columns:
     if col != 'Año':
         df[col] = df[col].str.replace('.', '', regex=False)
 
-# Elimina filas que no sean año de 4 dígitos legítimo
+# Elimina filas que no sean año de 4 digitos legitimo
 filtro_anios = df['Año'].fillna('').str.match(r'^\d{4}$')
 df = df[filtro_anios].copy()
 

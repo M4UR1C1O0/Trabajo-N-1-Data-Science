@@ -1,13 +1,13 @@
 from Limpieza import df # Importamos el dataframe limpio creado en Limpieza.py
 
-# Librerías necesarias
+# Librerias necesarias
 import pandas as pd 
 from sklearn.linear_model import LinearRegression # Importamos el modelo de regresión lineal
 import matplotlib.pyplot as plt                   # Librería para los graficos
 
 # Prediccion de fallecidos usando regresion lineal multiple
 
-#Definimos las variables independientes (X) y la variable dependiente (y)
+# Definimos las variables independientes (X) y la variable dependiente (y)
 X = df[['Siniestros','Población', 'Año','Tasa motorización','Lesionados - Graves', 'Lesionados - Leves', 'Lesionados - Menos graves',]]
 y = df['Fallecidos']
 
@@ -32,4 +32,4 @@ plt.legend()
 plt.tight_layout() 
 
 # Guardamos el grafico para su posterior visualizacion
-plt.savefig('regresion_lineal_multiple.png')
+plt.savefig('Imagenes/regresion_lineal_multiple.png')

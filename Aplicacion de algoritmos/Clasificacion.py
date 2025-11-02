@@ -26,7 +26,7 @@ modelo_simple.fit(X, y)
 # Predecir probabilidad continua para cada año
 probs = modelo_simple.predict_proba(X)[:,1]
 
-# Grafico
+# Grafico de la probabilidad predicha vs la tasa de siniestros por 10.000 habitantes
 plt.figure(figsize=(8,5))
 plt.scatter(df[feature], probs, s=80, c=probs, cmap='viridis', label='Probabilidad predicha')
 plt.xlabel("Tasa de siniestros por 10.000 hab.")
@@ -34,5 +34,6 @@ plt.ylabel("Probabilidad de alta accidentalidad (predicha)")
 plt.title("Regresión logística: probabilidad de alta accidentalidad vs tasa")
 plt.colorbar(label='Probabilidad predicha')
 plt.tight_layout()
-plt.savefig("probs_logistica_vs_tasa.png")
-plt.show()
+
+# Guardamos el grafico para su posterior visualizacion
+plt.savefig("Imagenes/probs_logistica_vs_tasa.png")
