@@ -7,5 +7,6 @@ import numpy as np
 #Librerias necesarias para la regresion lineal
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
 
+#Definimos las variables dependientes e independientes
+X = ['Parque vehicular', 'Población']

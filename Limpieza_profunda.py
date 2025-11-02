@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-archivo = 'Datos/datos_sin_subcategorias.csv'
+archivo = 'Datos/datos_sin_subcategoria.csv'
 df = pd.read_csv(archivo, encoding='utf-8')
 
 problemas = []
