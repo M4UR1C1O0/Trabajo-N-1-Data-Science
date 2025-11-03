@@ -1,10 +1,14 @@
-from Limpieza import df  # Importamos el dataframe limpio creado en Limpieza.py
+#from Limpieza_profunda import df  # Importamos el dataframe limpio creado en Limpieza.py
 
 # Librerias necesarias
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
+
+# Carga los datos
+archivo = 'Datos/datos_sin_subcategoria.csv'
+df = pd.read_csv(archivo, encoding='utf-8')
 
 # Prediccion de fallecidos usando regresion lineal multiple
 
