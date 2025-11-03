@@ -37,7 +37,8 @@ y_pred_test = modelo.predict(X_test)
 
 # Mostramos los coeficientes del modelo, la interseccion y la precision (R^2)
 print(f"\n Coeficientes: {modelo.coef_}")
-print(f"Interseccion: {modelo.intercept_}")
+print(f"Valor base (Interseccion): {modelo.intercept_}")
+print("(Este es el 'punto de partida' de la prediccion)")
 print(f"Precision en test (R^2): {modelo.score(X_test, y_test)}\n")
 
 # Grafico de los valores reales vs los valores predichos
