@@ -14,8 +14,8 @@ selected_features = [
     'Lesionados - Graves',
     'Indicadores cada 100.000 habitantes - Siniestralidad',
     'Parque vehicular',
-    'Poblacion',
-    'Tasa motorizacion'
+    'Población',
+    'Tasa motorización'
 ]
 
 # Crear variable objetivo: Alta mortalidad (por encima de la mediana)
@@ -87,5 +87,5 @@ plt.grid(True, linestyle='--', alpha=0.3)
 plt.tight_layout()
 
 # Guardar y mostrar grafico
-plt.savefig('curva_logistica_prediccion.png', dpi=300)
+plt.savefig('Imagenes/curva_logistica_prediccion.png', dpi=300)
 plt.show()
