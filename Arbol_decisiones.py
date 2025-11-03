@@ -118,5 +118,4 @@ legend_elements = [
 ax.legend(handles=legend_elements, loc='lower center', ncol=3, fontsize=10, frameon=True)
 
 plt.tight_layout()
-plt.savefig('arbol_decision_explicativo.png', dpi=300, bbox_inches='tight', facecolor='white')
-plt.show()
+plt.savefig('Imagenes/arbol_decision_explicativo.png', dpi=300, bbox_inches='tight', facecolor='white')
