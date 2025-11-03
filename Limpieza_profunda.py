@@ -86,12 +86,19 @@ cols = ['siniestros', 'fallecidos', 'lesionados - graves', 'lesionados - menos g
 # ==================== CHEQUEOS GENERALES ============
 vac = df[df.isnull().all(axis=1)].index
 if len(vac) > 0:
-    for idx in vac: problemas.append({'tipo': 'estructura - fila vacia', 'columna': 'todas', 'fila': idx, 'valor': 'vacia', 'desc': 'sin datos'})
+    for idx in vac: problemas.append({'tipo': 'estructura - fila vacia', 
+                                      'columna': 'todas', 
+                                      'fila': idx, 
+                                      'valor': 'vacia', 
+                                      'desc': 'sin datos'})
     print(f"\nfilas vacias: {len(vac)}")
 
 dup = df[df.duplicated(keep=False)].index
 if len(dup) > 0:
-    for idx in dup: problemas.append({'tipo': 'estructura - duplicada', 'columna': 'todas', 'fila': idx, 'valor': 'dup', 'desc': 'igual a otra'})
+    for idx in dup: problemas.append({'tipo': 'estructura - duplicada', 
+                                      'columna': 'todas', 'fila': idx, 
+                                      'valor': 'dup', 
+                                      'desc': 'igual a otra'})
     print(f"filas duplicadas: {len(dup)}")
 
 if all(c in df.columns for c in ['lesionados - graves', 'lesionados - menos graves', 'lesionados - leves', 'total lesionados']):
@@ -125,7 +132,7 @@ for col in vars_entero:
                 })
             print(f"{col}: {len(decimales)} valores decimales en columna física")
 
-# ==================== REPORTE FINAL (con decimales en variables físicas) ====================
+# ==================== REPORTE FINAL (con decimales en variables fisicas) ====================
 print(f"\n{'='*80}\nreporte final\n{'='*80}\n")
 if problemas:
     print(f"total: {len(problemas)} errores\n")

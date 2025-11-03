@@ -3,11 +3,24 @@ import pandas as pd
 # Cargar CSV original
 archivo = 'Datos/EvolucionsiniestrostransitoChile-1972-2024.csv'
 nombres = [
-    'Año','Siniestros','Fallecidos','Lesionados - Graves','Lesionados - Menos graves','Lesionados - Leves','Total lesionados',
-    'Total víctimas','Tasa motorización','Vehículos cada 100 habitantes','Parque vehicular','Población',
-    'Indicadores cada 10.000 vehículos - Siniestralidad','Indicadores cada 10.000 vehículos - Mortalidad','Indicadores cada 10.000 vehículos - Morbilidad',
-    'Indicadores cada 100.000 habitantes - Siniestralidad','Indicadores cada 100.000 habitantes - Mortalidad','Indicadores cada 100.000 habitantes - Morbilidad',
-    'Fallecidos cada 100 siniestros','Siniestros por cada fallecido'
+    'Año','Siniestros','Fallecidos',
+    'Lesionados - Graves',
+    'Lesionados - Menos graves',
+    'Lesionados - Leves',
+    'Total lesionados',
+    'Total víctimas',
+    'Tasa motorización',
+    'Vehículos cada 100 habitantes',
+    'Parque vehicular',
+    'Población',
+    'Indicadores cada 10.000 vehículos - Siniestralidad',
+    'Indicadores cada 10.000 vehículos - Mortalidad',
+    'Indicadores cada 10.000 vehículos - Morbilidad',
+    'Indicadores cada 100.000 habitantes - Siniestralidad',
+    'Indicadores cada 100.000 habitantes - Mortalidad',
+    'Indicadores cada 100.000 habitantes - Morbilidad',
+    'Fallecidos cada 100 siniestros',
+    'Siniestros por cada fallecido'
 ]
 
 df = pd.read_csv(archivo, sep=';', encoding='latin-1', skiprows=4, names=nombres, dtype=str)

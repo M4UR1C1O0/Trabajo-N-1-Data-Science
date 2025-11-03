@@ -32,9 +32,9 @@ modelo.fit(X_train, y_train)
 y_pred_test = modelo.predict(X_test)
 
 # Mostramos los coeficientes del modelo, la interseccion y la precision (R^2)
-print(f"Coeficientes: {modelo.coef_}")
+print(f"\n Coeficientes: {modelo.coef_}")
 print(f"Interseccion: {modelo.intercept_}")
-print(f"Precision en test (R^2): {modelo.score(X_test, y_test)}")
+print(f"Precision en test (R^2): {modelo.score(X_test, y_test)}\n")
 
 # Grafico de los valores reales vs los valores predichos
 # Extraemos los años para etiquetar los puntos
