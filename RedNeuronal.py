@@ -4,7 +4,7 @@ from tensorflow import keras
 from keras.models import Sequential
 from keras.layers import Dense
 
-# Cargamos el dataset, ya dividido en entrenamiento y prueba
+# Paso 1: Cargar y Preparar los Datos
 (x_train, y_train), (x_test, y_test) = keras.datasets.#########
 
 # Definimos el modelo secuencial
@@ -19,3 +19,15 @@ metrics=['accuracy'])
 
 # Mostramos resumen del modelo
 model.summary()
+
+
+#Paso 2: Construir la Arquitectura del Modelo
+
+#Paso 3: Compilar el Modelo
+
+#Paso 4: Entrenar el Modelo
+
+#Paso 5: Evaluar el Rendimiento
+
+#Paso 6: Hacer Predicciones
+
