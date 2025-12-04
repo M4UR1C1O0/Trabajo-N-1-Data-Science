@@ -16,7 +16,7 @@ df = pd.read_csv(archivo, encoding='utf-8')
 X = df[[
     'Siniestros', 
     'Población', 
-    'Año', 
+    'Año',
     'Tasa motorización', 
     'Lesionados - Graves', 
     'Lesionados - Leves', 
